@@ -14,6 +14,7 @@ void somatoria();
 void mediatoria();
 
 void opcoes(){
+    setlocale(LC_ALL, "Portuguese");
     cout << "Digite 1 para; Imprimir o somatório dos elementos de sua lista "<<endl;
     cout << "Digite 2 para; Imprimir a média de sua lista " <<endl;
     cout << "Digite 3 para; Imprimir a média e o somatório " <<endl;
@@ -34,6 +35,7 @@ void mediatoria(){
     media= soma/contador;
 }
 int main(){
+    setlocale(LC_ALL, "Portuguese");
     int metodo, i;
     string c;
 
