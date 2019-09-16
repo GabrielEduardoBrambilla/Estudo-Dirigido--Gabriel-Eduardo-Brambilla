@@ -1,129 +1,211 @@
+#include <stdio.h>
 #include <iostream>
-#include <vector>
 #include <stdlib.h>
-#include <string>
+#include <windows.h>
+#include <time.h>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-std :: vector<int> lista;
-int soma = 0,contador = 0;
-int media;
-void opcoes();
-void somatoria();
-void mediatoria();
+vector<int> numeros;
+int controle, Soma, i, decisao;
+double MEDIA;
 
-void opcoes(){
+void menu();
+void soma();
+void media();
+void carregamento();
+
+void menu(){
+
+    cout << "Digite [1] para: Imprimir a somatória de seus elementos\n";
+    cout << "Digite [2] para: Imprimir a média de seus elementos\n";
+    cout << "Digite [3] para: Imprimir a média e a somatória\n";
+    cout << "Digite [4] para: Substituir por zero todos os valores negativos e imprimir a média\n";
+    cout << "Digite [5] para: Substituir por zero todos os valores repetidos e imprimir a média e a somatória\n";
+    cout << "Digite [6] para: Mostrar vetor ordenado\n\n";
+    cout << "_-_-_-_-Digite o numero desejado e presione enter-_-_-_-_\n";
+}
+
+void soma(){
+
+    for ( i = 0; i < numeros.size() ; i++)
+    {
+
+        Soma += numeros[i];
+
+    }
+
+}
+
+void media(){
+    soma();
+    MEDIA = Soma / i;
+}
+
+void carregamento(){
+
+  for (int T = 1; T < 11; T++)
+        {
+
+    cout << "Carregando.  " <<  T  << "0%" ;
+    Sleep(10);
+    system("cls");
+
+    cout << "Carregando.. " << T << "0%" ;
+    Sleep(10);
+    system("cls");
+
+    cout << "Carregando..." << T << "0%" ;
+    Sleep(10);
+    system("cls");
+
+        }
+}
+
+
+int main (){
     setlocale(LC_ALL, "Portuguese");
-    cout << "Digite 1 para; Imprimir o somatório dos elementos de sua lista "<<endl;
-    cout << "Digite 2 para; Imprimir a média de sua lista " <<endl;
-    cout << "Digite 3 para; Imprimir a média e o somatório " <<endl;
-    cout << "Digite 4 para; Substituir por zero todos os valores negativos e imprimir a média da lista" <<endl;
-    cout << "Digite 5 para; Substituir por zero todos os valores repetidos e imprimir a média e o somatório da lista" <<endl;
-    cout << "Digite 6 para; Ordenar a lista em ordem crescente" <<endl;
-    cout << "Digite 0 para; Sair do aplicativo" <<endl;
-    cout << "***************Digite o numero desejado e presione enter*******************"<<endl;
-}
-void somatoria(){
-    soma = 0,contador = 0;
-    for(contador=0; contador != lista.size(); contador++){
-    soma = soma  + lista[contador];
- }
-}
-void mediatoria(){
- void somatoria();
-    media= soma/contador;
-}
-int main(){
-    setlocale(LC_ALL, "Portuguese");
-    int metodo, i;
-    string c;
 
-    cout << "********************Insira quantos numeros desejar em sua lista*********************"<<endl;
-        cout << "***************************Digite 0 quando desejar parar****************************"<<endl;
-            cout << "*********************O numero zero nao fara parte de sua lista**********************"<<endl;
+    int answer;
+    carregamento();
 
-        do{
-            cout << "Digite um numero para sua lista; ";
-            cin >> i;
-            lista.push_back(i);
-        }while(i != 0 );
+    cout << "##   INSIRA QUANTOS NÚMEROS INTEIROS DESEJAR NA LISTA    ##" << endl ;
+    cout << "# QUANDO QUISER PARAR, DIGITE [0] E O <MENU> IRÁ APARECER #" << endl;
+    cout << "##     O NÚMERO ZERO NÃO FARÁ PARTE DE SUA MEMÓRIA       ##"<< endl << endl;
 
- lista.pop_back();
- system("cls");
+// Digitar números
 
-    do {
-        opcoes();
-        cin >> metodo;
+do{
+    cout << "Digite o número desejado: ";
+    cin >> i;
+    numeros.push_back(i);
 
-        switch(metodo){
+}while( i != 0 );
+
+// Fim de digitar números
+
+// Start <MENU>
+
+    system("cls");
+    carregamento();
+
+     cout << "**DIGITE [0] PARA SAIR DO PROGRAMA A QUALQUER MOMENTO**\n\n";
+     numeros.pop_back();
+
+    do{
+
+    menu();
+
+        cin >> decisao;
+            cout << endl << endl;
+                system("cls");
+
+            switch (decisao){
+
                 case 1:
-                {   somatoria();
-                    cout <<"O somatorio e; "<<soma<<endl;
-                }
+                {
+
+                soma();
+
+                    cout << "O somatório é: " << Soma << endl;
+
                 break;
+                }
+
 
                 case 2:
-                {mediatoria();
-                    cout << "A média de sua lista é; "<<media<<endl;
+                {
+
+                media();
+
+                    cout << "A média de sua lista é; "<< MEDIA << endl;
+
+                break ;
                 }
-                break;
 
                 case 3:
                 {
-                  mediatoria();
-                  somatoria();
-                    cout << "A média de sua lista é; "<<media<<endl;
-                    cout << "***********&&***********"<<endl;
-                    cout << "A soma de sua lista e; "<<soma<<endl;
-                }
+
+
+                soma();
+                    media();
+
+                    cout << "A soma dos seus numeros é: " << Soma << endl;
+                        cout << "A media dos seus numeros é: " << MEDIA << endl;
+
                 break;
+                }
 
                 case 4:
                 {
-                    for(int i= 0; i != lista.size(); i++){
-                        if(lista[i] < 0){
-                            lista[i] = 0;
-                        }
-                        mediatoria();
-                        cout << "A média de sua lista positiva é; "<<media<<endl;
-                   }
-                }
-                break;
+
+                for ( i = 0; i <= numeros.size(); i++){
+
+                    if (numeros[i] < 0)
+                    {
+                        numeros[i] = 0;
+                    }
+
+                        media();
+                    }
+
+                        cout << "A média de sua lista positiva é; " << MEDIA << endl;
+
+                    break;
+                    }
+
 
                 case 5:
                 {
-                    sort(lista.begin(), lista.end());
-                    for(int i= 0; i != lista.size(); i++){
-                        if(lista[i] == lista[i+1]){
-                            lista[i]= 0;
-                       }
-                    }
-                    mediatoria();
-                    somatoria();
-                        cout << "A média de sua lista positiva é; "<<media<<endl;
-                        cout <<"O somatorio e; "<<soma<<endl;
+                    sort(numeros.begin(), numeros.end());
+
+                    for(int i= 0; i != numeros.size(); i++){
+
+                        if(numeros[i] == numeros[i+1])
+                        {
+                            numeros[i]= 0;
+                        }
+
+                        }
+
+                            media();
+                                soma();
+                                    cout << "A média de sua lista sem valores repetidos é: "<< MEDIA << endl;
+                                        cout <<"O somatorio e: "<< Soma <<endl;
                 }
                 break;
+
                 case 6:
                 {
-                    cout<<"******************SUA LISTA ORDENADA EM ORDEM CRESCENTE********************"<<endl;
-                    std::sort(lista.begin(), lista.end());
-                    for(int i = 0; i != lista.size(); i++){
-                        cout <<"                          " << lista[i]<<endl;
+                    cout<<"###################SUA LISTA ORDENADA EM ORDEM CRESCENTE###################"<<endl;
+                        std::sort(numeros.begin(), numeros.end());
+
+
+                    for(int i = 0; i != numeros.size(); i++){
+
+                    cout <<"                                    " << numeros[i]<<endl;
+
                     }
                 }
+
                 break;
 
-        }
+}
 
-        cout << "**********Pressione qualquer numero diferente de 0 para continuar**********"<<endl;
-        cout << "*******************************Ou 0 para parar*****************************"<<endl;
-        cin >> metodo;
+        cout << "#######Pressione qualquer número (exeto o ZERO) para continuar##########"<<endl;
+        cout << "############################Ou [0] para parar#############################"<<endl;
+
+        cin >> decisao;
 
         system("cls");
 
-     }while( metodo != 0);
+     }while(decisao != 0);
 
     return 0;
 }
+
+
+
+
